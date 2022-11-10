@@ -23,22 +23,24 @@ public class MovementPlayer : MonoBehaviour
     public float sprintingSpeedMultiplier = 1.5f;
 
     private float sprintSpeed = 1f;
-    internal static object instance;
+    //internal static object instance;
 
     void Start()
-    {
+    {   
         StartCoroutine(TrackPlayer());
     }
-    
+
     IEnumerator TrackPlayer ()
     {
         while (true)
         {
-                playerPos = gameObject.transform.position;
+                playerPos = gameObject.transform.position ;
                 yield return null;
         }
             
     }
+
+
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);

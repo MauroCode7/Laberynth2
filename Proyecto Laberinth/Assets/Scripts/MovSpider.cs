@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,123 +30,110 @@ public class MovSpider : MonoBehaviour
         waitCounter = waitAtPoint;
     }
     
-    // void Update()
-    // {
-    //     float distanceToPlayer = Vector3.Distance(transform.position, 
-    //     MovementPlayer.instance.transform.position);  
+    void Update()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, MovementPlayer.playerPos);  
 
-    //     switch (currentState)
-    //     {
-    //         case AIState.Idle:
-    //             animator.SetBool("IsMoving", false);
+        switch (currentState)
+        {
+            case AIState.Idle:
+                animator.SetBool("IsMoving", false);
 
-    //             if (waitCounter > 0)
-    //             {
-    //                 waitCounter -= Time.deltaTime;
-    //             }
-    //             else
-    //             {
-    //                     currentState = AIState.Patrolling;
-    //                     agent.SetDestination(patrolPoints[currentPatrolPoint].position);
-    //             }
-    //             if(distanceToPlayer <= chaseRange)
-    //             {
-    //                 currentState = AIState.Chasing;
-    //                 animator.SetBool("IsMoving",true);
-    //             }
-    //             break;
+                if (waitCounter > 0)
+                {
+                    waitCounter -= Time.deltaTime;
+                }
+                else
+                {
+                        currentState = AIState.Patrolling;
+                        agent.SetDestination(patrolPoints[currentPatrolPoint].position);
+                }
+                if(distanceToPlayer <= chaseRange)
+                {
+                    currentState = AIState.Chasing;
+                    animator.SetBool("IsMoving",true);
+                }
+                break;
                 
-    //         case AIState.Patrolling:
+            case AIState.Patrolling:
                     
-    //             if(agent.remainingDistance <= .2f)  //.noseque
-    //             {
-    //                 currentPatrolPoint++;
-    //                 if(currentPatrolPoint >= patrolPoints.Length)
-    //                 {
-    //                     currentPatrolPoint=0;       
-    //                 }
-    //                     currentState = AIState.Idle;
-    //                     waitCounter = waitAtPoint;
-    //                 }
+                if(agent.remainingDistance <= .2f)  //.noseque
+                {
+                    currentPatrolPoint++;
+                    if(currentPatrolPoint >= patrolPoints.Length)
+                    {
+                        currentPatrolPoint=0;       
+                    }
+                        currentState = AIState.Idle;
+                        waitCounter = waitAtPoint;
+                    }
 
-    //                 if (distanceToPlayer <= chaseRange)
-    //                 {
-    //                     currentState = AIState.Chasing;
-    //                 }
+                    if (distanceToPlayer <= chaseRange)
+                    {
+                        currentState = AIState.Chasing;
+                    }
                     
-    //                 animator.SetBool("isMoving",true);
+                    animator.SetBool("isMoving",true);
 
-    //                 break;
+                    break;
 
-    //     case AIState.Chasing:
-    //         agent.SetDestination(MovementPlayer.instance.transform.position); //laweactmhijodelaputa
+        case AIState.Chasing:
+            agent.SetDestination(MovementPlayer.playerPos); //laweactmhijodelaputa
 
-    //         if (distanceToPlayer <= attackRange)
-    //         {
-    //             currentState = AIState.Attacking;
-    //             animator.SetTrigger("Attack");
-    //             animator.SetBool("IsMoving", false);
+            if (distanceToPlayer <= attackRange)
+            {
+                currentState = AIState.Attacking;
+                animator.SetTrigger("Attack");
+                animator.SetBool("IsMoving", false);
 
-    //             agent.velocity = Vector3.zero;
-    //             agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+                agent.isStopped = true;
 
-    //             attackCounter = timeBetweenAttacks;
-    //         }
+                attackCounter = timeBetweenAttacks;
+            }
 
-    //         if (distanceToPlayer > chaseRange)
-    //         {
-    //             currentState = AIState.Idle;
-    //             waitCounter = waitAtPoint;
+            if (distanceToPlayer > chaseRange)
+            {
+                currentState = AIState.Idle;
+                waitCounter = waitAtPoint;
 
-    //             agent.velocity = Vector3.zero;
-    //             agent.SetDestination(transform.position);
+                agent.velocity = Vector3.zero;
+                agent.SetDestination(transform.position);
 
-    //         }
+            }
 
-    //             break;
+                break;
 
-    //     case AIState.Attacking:
+        case AIState.Attacking:
                     
-    //         transform.LookAt(MovementPlayer.instance.transform, Vector3.up);
-    //         transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+            transform.LookAt(MovementPlayer.playerPos, Vector3.up);
+            transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
 
-    //             attackCounter -= Time.deltaTime;
-    //             if (attackCounter <= 0)
-    //             {
-    //                 if (distanceToPlayer < attackRange && life == false)
-    //                 {
-    //                     animator.SetTrigger("Attack");
-    //                     attackCounter = timeBetweenAttacks;
-    //                 }
-    //                 else
-    //                 {
-    //                     currentState = AIState.Idle;
-    //                     waitCounter = waitAtPoint;
+                attackCounter -= Time.deltaTime;
+                if (attackCounter <= 0)
+                {
+                    if (distanceToPlayer < attackRange && life == false)
+                    {
+                        animator.SetTrigger("Attack");
+                        attackCounter = timeBetweenAttacks;
+                    }
+                    else
+                    {
+                        currentState = AIState.Idle;
+                        waitCounter = waitAtPoint;
 
-    //                     agent.isStopped = false;
-    //                 }
-    //             }
+                        agent.isStopped = false;
+                    }
+                }
 
-    //             break;
-    //     }
+                break;
+        }
 
-    // }
-        // private void PlayerLife()
-        // {
-        //     life = true;
-        // }
-        
-        // private void OnEnable()
-        // {
-        //     HealthManager.DeatWrite += PlayerLife;
-        // }
-        
-        // private void OnDisable()
-        // {
-        //     HealthManager.DeatWrite -=PlayerLife;
-        // }
+    }
+}
+ 
 
-}    
+    
 
 
 
