@@ -16,13 +16,13 @@ public class MovementPlayer : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
 
-    public float jumpHeight = 3;
+    public float jumpHeight = 3f;
 
     public bool isSprinting;
 
     public float sprintingSpeedMultiplier = 1.5f;
 
-    private float sprintSpeed = 1;
+    private float sprintSpeed = 1f;
 
 
 
