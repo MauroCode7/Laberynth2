@@ -23,10 +23,8 @@ public class MovementPlayer : MonoBehaviour
     public float sprintingSpeedMultiplier = 1.5f;
 
     private float sprintSpeed = 1f;
+    internal static object instance;
 
-
-
-    
     void Start()
     {
         StartCoroutine(TrackPlayer());
