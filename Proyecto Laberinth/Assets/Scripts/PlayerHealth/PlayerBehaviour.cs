@@ -4,25 +4,9 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayerTakeDmg(20);
-            Debug.Log(GameManager.gameManager._playerHealth.Health);
-        }
-
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            PlayerHeal(10);
-            Debug.Log(GameManager.gameManager._playerHealth.Health);
-        }
-    }
+    
+    public bool ingreso = false;
+    float time = 1f;
 
     private void PlayerTakeDmg(int dmg)
     {
@@ -30,9 +14,29 @@ public class PlayerBehaviour : MonoBehaviour
 
     }
 
-     private void PlayerHeal(int healing)
+     private void PlayerHeal(int healing) 
     {
         GameManager.gameManager._playerHealth.HealUnit(healing);
 
     }
+
+    private void OnTriggerEnter (Collider col)
+    {
+
+        if (col.gameObject.CompareTag("DmgSphere"))
+        {
+            PlayerTakeDmg(10);
+            Debug.Log(GameManager.gameManager._playerHealth.Health);
+        }
+    }
+
+    private void OnTriggerExit (Collider col)
+    {
+        if (col.gameObject.CompareTag("DmgSphere"))
+        {
+            //ingreso = false;
+        }
+    }
+
+   
 }

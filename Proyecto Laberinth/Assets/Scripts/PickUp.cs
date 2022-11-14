@@ -22,10 +22,13 @@ public class PickUp : MonoBehaviour
             totalOsos += 1;
             PlayerPrefs.SetInt("Osos", totalOsos);
             Destroy(gameObject);
+            PlayerHeal(10);
+            Debug.Log(GameManager.gameManager._playerHealth.Health);
+            
 
         }
     }
-
+    
     private void OnTriggerEnter (Collider other)
     {
 
@@ -43,5 +46,9 @@ public class PickUp : MonoBehaviour
         }
     }
 
+    private void PlayerHeal(int healing) 
+    {
+        GameManager.gameManager._playerHealth.HealUnit(healing);
 
+    }
 }
