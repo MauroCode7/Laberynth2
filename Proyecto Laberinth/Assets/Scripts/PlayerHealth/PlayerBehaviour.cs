@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    
-    public bool ingreso = false;
-    float time = 1f;
 
     private void PlayerTakeDmg(int dmg)
     {
@@ -27,14 +24,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             PlayerTakeDmg(10);
             Debug.Log(GameManager.gameManager._playerHealth.Health);
-        }
-    }
-
-    private void OnTriggerExit (Collider col)
-    {
-        if (col.gameObject.CompareTag("DmgSphere"))
-        {
-            //ingreso = false;
         }
     }
 

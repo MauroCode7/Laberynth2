@@ -37,7 +37,7 @@ public class MovSpider : MonoBehaviour
         switch (currentState)
         {
             case AIState.Idle:
-                animator.SetBool("IsMoving", false);
+                animator.SetBool("IsMoving",false);
 
                 if (waitCounter > 0)
                 {
@@ -56,6 +56,7 @@ public class MovSpider : MonoBehaviour
                 break;
                 
             case AIState.Patrolling:
+            
                     
                 if(agent.remainingDistance <= .2f)  //.noseque
                 {
@@ -73,12 +74,13 @@ public class MovSpider : MonoBehaviour
                         currentState = AIState.Chasing;
                     }
                     
-                    animator.SetBool("isMoving",true);
+                    animator.SetBool("IsMoving",true);
 
                     break;
 
         case AIState.Chasing:
             agent.SetDestination(MovementPlayer.playerPos); //laweactmhijodelaputa
+    
 
             if (distanceToPlayer <= attackRange)
             {
