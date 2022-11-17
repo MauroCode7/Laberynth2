@@ -3,7 +3,8 @@ using UnityEngine.AI;
 
 
 public class MovSpider : MonoBehaviour
-{
+{   
+
     public Transform[] patrolPoints;
     public int currentPatrolPoint;
     public NavMeshAgent agent;
@@ -118,6 +119,8 @@ public class MovSpider : MonoBehaviour
                     {
                         animator.SetTrigger("Attack");
                         attackCounter = timeBetweenAttacks;
+                        
+                        
                     }
                     else
                     {

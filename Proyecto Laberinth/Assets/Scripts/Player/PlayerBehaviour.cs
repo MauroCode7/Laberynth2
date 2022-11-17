@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public AudioSource audiosrc;
+    
+    [SerializeField] private AudioClip attackSound1;
 
+    [SerializeField] private AudioClip attackSound2;
     private void PlayerTakeDmg(int dmg)
     {
         GameManager.gameManager._playerHealth.DmgUnit(dmg);

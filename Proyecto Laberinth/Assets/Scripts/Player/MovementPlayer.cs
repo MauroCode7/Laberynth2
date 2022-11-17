@@ -23,7 +23,8 @@ public class MovementPlayer : MonoBehaviour
     public float sprintingSpeedMultiplier = 1.5f;
 
     private float sprintSpeed = 1f;
-    //internal static object instance;
+
+    public Animator anim;
 
     void Start()
     {   
@@ -53,9 +54,14 @@ public class MovementPlayer : MonoBehaviour
         float x =Input.GetAxis("Horizontal");
         float z =Input.GetAxis("Vertical"); 
 
-
         Vector3 move = transform.right * x + transform.forward * z;
 
+        if(Input.GetButtonDown("Jump"))
+        {
+            anim.SetTrigger("IsJumping");
+        }
+        
+      
         JumpCheck();
         
         RunCheck();
@@ -66,13 +72,22 @@ public class MovementPlayer : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime); 
 
+          if(move == Vector3.zero)
+        {
+            anim.SetBool ("IsRunning",false);
+        }else
+        {
+            anim.SetBool ("IsRunning",true);
+        }
+
     }
 
     void JumpCheck()
     {
-          if(Input.GetButtonDown("Jump") && isGrounded) 
+          if(Input.GetKeyDown(KeyCode.Space) && isGrounded) 
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            anim.SetBool("IsJumping", true);
         }
     }
     void RunCheck()
