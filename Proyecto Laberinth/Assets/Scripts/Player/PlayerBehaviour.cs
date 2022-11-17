@@ -5,20 +5,19 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     public AudioSource audiosrc;
-    
-    [SerializeField] private AudioClip attackSound1;
+    [SerializeField] HpPlayer _healthbar;
 
-    [SerializeField] private AudioClip attackSound2;
+ 
     private void PlayerTakeDmg(int dmg)
     {
         GameManager.gameManager._playerHealth.DmgUnit(dmg);
-
+    
     }
 
      private void PlayerHeal(int healing) 
     {
         GameManager.gameManager._playerHealth.HealUnit(healing);
-
+        
     }
 
     private void OnTriggerEnter (Collider col)
@@ -28,8 +27,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
             PlayerTakeDmg(10);
             Debug.Log(GameManager.gameManager._playerHealth.Health);
+            _healthbar.SetHealth(GameManager.gameManager._playerHealth.Health);
+            
+            
         }
     }
 
-   
 }
