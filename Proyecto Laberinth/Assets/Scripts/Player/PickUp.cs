@@ -8,7 +8,7 @@ public class PickUp : MonoBehaviour
 {
 
     bool ingreso = false;
-    public int totalOsos;
+    public int totalOsos = 0;
 
     void Start()
     {
@@ -20,10 +20,15 @@ public class PickUp : MonoBehaviour
         if (ingreso && Input.GetKey(KeyCode.E))
         {
             totalOsos += 1;
+            Debug.Log(totalOsos +=1);
             PlayerPrefs.SetInt("Osos", totalOsos);
             Destroy(gameObject);
+            
             PlayerHeal(10);
             Debug.Log(GameManager.gameManager._playerHealth.Health);
+
+            
+    
             
 
         }

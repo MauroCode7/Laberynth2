@@ -17,7 +17,7 @@ public class EnemyS : MonoBehaviour
         audiosrc = GetComponent<AudioSource>();
     }
 
-    private void ChangeClipAndAttack(AudioClip clip)
+    public void ChangeClipAndAttack(AudioClip clip)
     {
         audiosrc.clip = clip;
         audiosrc.Play();
@@ -38,6 +38,5 @@ public class EnemyS : MonoBehaviour
         ChangeClipAndAttack(attackSound2);
     }
 
-
+    
 }
-

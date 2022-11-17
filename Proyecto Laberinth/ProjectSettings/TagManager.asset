@@ -10,6 +10,7 @@ TagManager:
   - AI
   - Osos
   - DmgSphere
+  - GameHUD
   layers:
   - Default
   - TransparentFX
